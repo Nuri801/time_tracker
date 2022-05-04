@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "94054631435",
+    "project_id": "timetracker-fbeed",
+    "storage_bucket": "timetracker-fbeed.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:94054631435:android:5f63eeb28572d85c989f0e",
+        "android_client_info": {
+          "package_name": "com.example.time_tracker"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "94054631435-ctke7ppseuuaivtjt0ssivq49jodoask.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.time_tracker",
+            "certificate_hash": "a4ca607007b48dccb6c1c02b141ff32ff81121ba"
+          }
+        },
+        {
+          "client_id": "94054631435-apb56igj6ju60dvpe2tlrrnrgv91tlgp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA2TFkuB1sfUtj-H5Ct6yQLsj3Nv_2jie8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "94054631435-apb56igj6ju60dvpe2tlrrnrgv91tlgp.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
