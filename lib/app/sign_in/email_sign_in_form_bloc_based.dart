@@ -97,7 +97,7 @@ class _EmailSignInFormBlocBasedState extends State<EmailSignInFormBlocBased> {
   TextField _buildEmailTextField(EmailSignInModel? model) {
     bool showErrorText = model!.submitted && !widget.emailValidator.isValid(model!.email);
     return TextField(
-      onChanged: (email) => _updateState(),
+      onChanged: (email) => widget.bloc.updateWith(email: email),
       controller: _emailController,
       decoration: InputDecoration(
         labelText: 'Email',
@@ -115,7 +115,7 @@ class _EmailSignInFormBlocBasedState extends State<EmailSignInFormBlocBased> {
     bool showErrorText =
         model!.submitted && !widget.passwordValidator.isValid(model!.password);
     return TextField(
-      onChanged: (password) => _updateState(),
+      onChanged: (password) => widget.bloc.updateWith(password: password),
       controller: _passwordController,
       decoration: InputDecoration(
         labelText: 'Password',
@@ -145,8 +145,5 @@ class _EmailSignInFormBlocBasedState extends State<EmailSignInFormBlocBased> {
         );
       }
     );
-  }
-  void _updateState() {
-    setState(() {});
   }
 }
