@@ -34,14 +34,6 @@ class _EmailSignInFormBlocBasedState extends State<EmailSignInFormBlocBased> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
-  String get _email => _emailController.text;
-  String get _password => _passwordController.text;
-
-  EmailSignInFormType _formType = EmailSignInFormType.signIn;
-
-  bool _submitted = false;
-  bool _isLoading = false;
-
   @override
   void dispose() {
     _emailController.dispose();
@@ -50,17 +42,8 @@ class _EmailSignInFormBlocBasedState extends State<EmailSignInFormBlocBased> {
   }
 
   void _submit() async {
-    setState(() {
-      _submitted = true;
-      _isLoading = true;
-    });
     try {
-      final auth = Provider.of<AuthBase>(context, listen: false);
-      if (_formType == EmailSignInFormType.signIn) {
-        await auth.signInWithEmailAndPassword(_email, _password);
-      } else {
-        await auth.createUserWithEmailAndPassword(_email, _password);
-      }
+      await widget.bloc.submit();
       Navigator.of(context).pop();
     } on FirebaseAuthException catch (e) {
       showExceptionAlertDialog(
@@ -68,10 +51,6 @@ class _EmailSignInFormBlocBasedState extends State<EmailSignInFormBlocBased> {
           title: 'Sign in failed',
           exception: e
       );
-    } finally {
-      setState(() {
-        _isLoading = false;
-      });
     }
   }
 
@@ -86,7 +65,7 @@ class _EmailSignInFormBlocBasedState extends State<EmailSignInFormBlocBased> {
     _passwordController.clear();
   }
 
-  List<Widget> _buildChildren() {
+  List<Widget> _buildChildren(EmailSignInModel? model) {
     final primaryText = _formType == EmailSignInFormType.signIn
         ? 'Sign in'
         : 'Create an account';
@@ -149,28 +128,25 @@ class _EmailSignInFormBlocBasedState extends State<EmailSignInFormBlocBased> {
     );
   }
 
-  void _updateState() {
-    setState(() {});
-  }
-
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<EmailSignInModel>(
       stream: widget.bloc.modelStream,
       initialData: EmailSignInModel(),
       builder: (context, snapshot) {
+        final EmailSignInModel? model = snapshot.data;
         return Padding(
           padding: EdgeInsets.all(16.0),
-          child: ModalProgressHUD(
-            inAsyncCall: _isLoading,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              mainAxisSize: MainAxisSize.min,
-              children: _buildChildren(),
-            ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            mainAxisSize: MainAxisSize.min,
+            children: _buildChildren(model),
           ),
         );
       }
     );
+  }
+  void _updateState() {
+    setState(() {});
   }
 }
