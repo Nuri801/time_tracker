@@ -155,16 +155,22 @@ class _EmailSignInFormBlocBasedState extends State<EmailSignInFormBlocBased> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.all(16.0),
-      child: ModalProgressHUD(
-        inAsyncCall: _isLoading,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          mainAxisSize: MainAxisSize.min,
-          children: _buildChildren(),
-        ),
-      ),
+    return StreamBuilder<EmailSignInModel>(
+      stream: widget.bloc.modelStream,
+      initialData: EmailSignInModel(),
+      builder: (context, snapshot) {
+        return Padding(
+          padding: EdgeInsets.all(16.0),
+          child: ModalProgressHUD(
+            inAsyncCall: _isLoading,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              mainAxisSize: MainAxisSize.min,
+              children: _buildChildren(),
+            ),
+          ),
+        );
+      }
     );
   }
 }
