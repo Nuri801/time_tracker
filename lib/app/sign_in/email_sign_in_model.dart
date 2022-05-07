@@ -33,6 +33,12 @@ class EmailSignInModel with EmailAndPasswordValidators {
         !isLoading;
   }
 
+  String? get passwordErrorText {
+    bool showErrorText =
+        submitted && !passwordValidator.isValid(password);
+    return showErrorText ? invalidEmailErrorText : null;
+  }
+
   EmailSignInModel copyWith({
   String? email,
   String? password,
