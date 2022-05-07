@@ -96,14 +96,12 @@ class _EmailSignInFormBlocBasedState extends State<EmailSignInFormBlocBased> {
   }
 
   TextField _buildPasswordTextField(EmailSignInModel? model) {
-    bool showErrorText =
-        model!.submitted && !model.passwordValidator.isValid(model!.password);
     return TextField(
       onChanged: widget.bloc.updatePassword,
       controller: _passwordController,
       decoration: InputDecoration(
         labelText: 'Password',
-        errorText: showErrorText ? model.invalidPasswordErrorText : null,
+        errorText: model!.passwordErrorText,
         enabled: model!.isLoading == false,
       ),
       textInputAction: TextInputAction.done,
