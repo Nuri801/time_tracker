@@ -79,14 +79,13 @@ class _EmailSignInFormBlocBasedState extends State<EmailSignInFormBlocBased> {
   }
 
   TextField _buildEmailTextField(EmailSignInModel? model) {
-    bool showErrorText = model!.submitted && !model.emailValidator.isValid(model!.email);
     return TextField(
       onChanged: widget.bloc.updateEmail,
       controller: _emailController,
       decoration: InputDecoration(
         labelText: 'Email',
         hintText: 'test@test.com',
-        errorText: showErrorText ? model.invalidEmailErrorText : null,
+        errorText: model!.emailErrorText,
         enabled: model!.isLoading == false,
       ),
       autocorrect: false,
