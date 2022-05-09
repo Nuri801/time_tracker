@@ -99,7 +99,7 @@ class _EmailSignInFormBlocBasedState extends State<EmailSignInFormBlocBased> {
       onChanged: widget.bloc.updatePassword,
       controller: _passwordController,
       decoration: InputDecoration(
-        labelText: 'Password',
+        labelText: 'your password here',
         errorText: model!.passwordErrorText,
         enabled: model!.isLoading == false,
       ),
