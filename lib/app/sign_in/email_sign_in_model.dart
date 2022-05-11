@@ -40,7 +40,7 @@ class EmailSignInModel with EmailAndPasswordValidators {
   }
 
   String? get emailErrorText {
-    bool showErrorText = submitted && emailValidator.isValid(email);
+    bool showErrorText = submitted && !emailValidator.isValid(email);
     return showErrorText ? invalidEmailErrorText : null;
   }
 
