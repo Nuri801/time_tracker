@@ -17,11 +17,15 @@ class SignInPage extends StatelessWidget {
 
   static Widget create(BuildContext context) {
     final auth = Provider.of<AuthBase>(context, listen: false);
-    return Provider<SignInBloc>(
-      create: (_) => SignInBloc(auth: auth),
-      dispose: (_, bloc) => bloc.dispose(),
-      child: Consumer<SignInBloc>(
-        builder: (_, bloc, __) => SignInPage(bloc: bloc),
+    return ChangeNotifierProvider<ValueNotifier<bool>>(
+      create: (_) => ValueNotifier<bool>(false),
+      child: Consumer<ValueNotifier<bool>>(
+        builder: (_, isLoading, __) => Provider<SignInBloc>(
+          create: (_) => SignInBloc(auth: auth),
+          child: Consumer<SignInBloc>(
+            builder: (_, bloc, __) => SignInPage(bloc: bloc),
+          ),
+        ),
       ),
     );
   }
