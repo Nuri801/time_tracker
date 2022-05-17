@@ -12,8 +12,9 @@ import '../../common_widgets/show_alert_dialog.dart';
 import '../../services/auth.dart';
 
 class SignInPage extends StatelessWidget {
-  const SignInPage({Key? key, required this.bloc}) : super(key: key);
+  const SignInPage({Key? key, required this.bloc, required this.isLoading}) : super(key: key);
   final SignInBloc bloc;
+  final bool isLoading;
 
   static Widget create(BuildContext context) {
     final auth = Provider.of<AuthBase>(context, listen: false);
@@ -23,7 +24,7 @@ class SignInPage extends StatelessWidget {
         builder: (_, isLoading, __) => Provider<SignInBloc>(
           create: (_) => SignInBloc(auth: auth, isLoading: isLoading),
           child: Consumer<SignInBloc>(
-            builder: (_, bloc, __) => SignInPage(bloc: bloc),
+            builder: (_, bloc, __) => SignInPage(bloc: bloc, isLoading: isLoading.value),
           ),
         ),
       ),
