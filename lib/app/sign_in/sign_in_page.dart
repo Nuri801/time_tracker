@@ -51,7 +51,7 @@ class SignInPage extends StatelessWidget {
   Future<void> facebookSignIn(BuildContext context) async {
     final didRequestSignOut = await showAlertDialog(context,
         title: 'Technical error',
-        content: 'Facebook login is unavailable.',
+        content: 'Facebook login is unavailable, sorry.',
         defaultActionText: 'OK');
   }
 
